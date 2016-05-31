@@ -48,7 +48,8 @@ class Ball {
   }
 
   void draw(){
-      ellipse(x, y, rad, rad);
+      fill(c);
+      ellipse(x, y, rad*2, rad*2);
   }
 
   void process(){
@@ -58,10 +59,10 @@ class Ball {
          state = SHRINKING;
     }
     if (state == GROWING)
-      rad += 1;
+      rad += 0.5;
     
     if (state == SHRINKING)
-      rad -= 1;
+      rad -=0.5;
     
     if (state == MOVING)
       move();
