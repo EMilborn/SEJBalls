@@ -15,13 +15,24 @@ void setup() {
 
 void draw() {
   background(0);
+  
+  if (mousePressed)
+    mouseClicked();
 
-  for (int i=0; i < balls.length; i++) {
-
+  if (reactionStarted){
+    for (int i=0; i < balls.length; i++) {//INFECTION SECTION
+         if (balls[i].state == Ball.GROWING || balls[i].state == Ball.SHRINKING){
+             for( Ball b : balls){
+                  if (balls[i].isTouching(b) && b.state == Ball.MOVING)
+                    b.state = Ball.GROWING;                
+             }
+         }
+    }  
   }
 
-  for (int i=0; i < balls.length; i++) {
-    balls[i].draw(i);
+
+  for (int i=0; i < balls.length; i++) {//DO UR ACTIONS AND DRAW URSELF
+    balls[i].draw();
     balls[i].process();
   }
 }

@@ -39,10 +39,39 @@ class Ball {
     y = y + dy;
     bounce();
   }
+  
+  void bounce(){
+    if (x <= rad || x >= 600 - rad)
+        dx = -dx;
+    if (y <= rad || y >= 600 - rad)
+        dy = -dy;
+  }
 
+  void draw(){
+      ellipse(x, y, rad, rad);
+  }
 
+  void process(){
+    if (rad <= 0)
+       state = DEAD;
+    if (rad >= 50){
+         state = SHRINKING;
+    }
+    if (state == GROWING)
+      rad += 1;
+    
+    if (state == SHRINKING)
+      rad -= 1;
+    
+    if (state == MOVING)
+      move();
+    
+  }
  boolean isTouching(Ball other) {
-
+      float dSqrd = ((other.x - x)*(other.x - x)) + ((other.y - y)*(other.y - y));
+      if (dSqrd <= (rad+other.rad) * (rad+other.rad))
+          return true;
+      return false;
  }
 
 }//end class Ball
