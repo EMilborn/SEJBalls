@@ -48,8 +48,10 @@ class Ball {
   }
 
   void draw(){
+    if (state != DEAD){
       fill(c);
       ellipse(x, y, rad*2, rad*2);
+    }
   }
 
   void process(){
